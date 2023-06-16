@@ -98,14 +98,21 @@ void MainComponent::hostVST3(juce::File &file)
     formatManager.addDefaultFormats();
     OwnedArray<PluginDescription> typesFound;
 
-    int formats = formatManager.getNumFormats();
-
-    infoLabel.setText("Formats: " + String(formats), juce::dontSendNotification);
-
-    //AudioPluginFormat* format = formatManager.getFormat();
+    AudioPluginFormat* format = formatManager.getFormat(0);
 
     KnownPluginList pluginList;
-    //pluginList.scanAndAddFile(vst3Description.fileOrIdentifier, true, typesFound, *format);
+    pluginList.scanAndAddFile(vst3Description.fileOrIdentifier, true, typesFound, *format);
 
+    juce::String errorMessage;
 
+    std::unique_ptr<AudioPluginInstance> vst3Instance = formatManager.createPluginInstance(*typesFound[0], 44100.0, 512, errorMessage);
+
+    if(vst3Instance != nullptr)
+    {
+        infoLabel.setText("VST3 LOADED!", juce::dontSendNotification);
+    }
+    else
+    {
+        infoLabel.setText("VST3 NOT LOADED", juce::dontSendNotification);
+    }
 }
