@@ -93,7 +93,7 @@ void MainComponent::retrieveVST3data(juce::File &file)
 
 }
 
-void MainComponent::hostVST3(juce::File &file)
+std::unique_ptr<AudioPluginInstance> MainComponent::hostVST3(juce::File &file)
 {
     formatManager.addDefaultFormats();
     OwnedArray<PluginDescription> typesFound;
