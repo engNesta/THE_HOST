@@ -24,11 +24,14 @@ public:
     void buttonClicked(juce::Button *button) override;
     void loadFile();
     void retrieveVST3data(juce::File &file);
+    void hostVST3(juce::File &file);
 
 private:
     //==============================================================================
     // Your private member variables go here...
     std::unique_ptr<juce::FileChooser> fileChooser;
+    juce::AudioPluginFormatManager formatManager;
+    PluginDescription vst3Description;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

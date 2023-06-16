@@ -25,7 +25,11 @@ target_compile_definitions(THE_HOST
         JUCE_WEB_BROWSER=0  # If you remove this, add `NEEDS_WEB_BROWSER TRUE` to the `juce_add_gui_app` call
         JUCE_USE_CURL=0     # If you remove this, add `NEEDS_CURL TRUE` to the `juce_add_gui_app` call
         JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:THE_HOST,JUCE_PRODUCT_NAME>"
-        JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:THE_HOST,JUCE_VERSION>")
+        JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:THE_HOST,JUCE_VERSION>"
+        JUCE_PLUGINHOST_VST3=1)
+
+
+
 
 target_link_libraries(THE_HOST
         PRIVATE

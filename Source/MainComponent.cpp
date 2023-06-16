@@ -71,6 +71,7 @@ void MainComponent::loadFile()
         {
             auto path = result.getFullPathName();
             retrieveVST3data(result);
+            hostVST3(result);
 
         }
     });
@@ -78,7 +79,8 @@ void MainComponent::loadFile()
 
 void MainComponent::retrieveVST3data(juce::File &file)
 {
-    PluginDescription vst3Description;
+
+
     vst3Description.fileOrIdentifier = file.getFullPathName();
     vst3Description.uniqueId = 0;
     vst3Description.name = file.getFileNameWithoutExtension();
@@ -88,5 +90,22 @@ void MainComponent::retrieveVST3data(juce::File &file)
                       vst3Description.pluginFormatName + "\n" +
                       vst3Description.fileOrIdentifier,
                       juce::dontSendNotification);
+
+}
+
+void MainComponent::hostVST3(juce::File &file)
+{
+    formatManager.addDefaultFormats();
+    OwnedArray<PluginDescription> typesFound;
+
+    int formats = formatManager.getNumFormats();
+
+    infoLabel.setText("Formats: " + String(formats), juce::dontSendNotification);
+
+    //AudioPluginFormat* format = formatManager.getFormat();
+
+    KnownPluginList pluginList;
+    //pluginList.scanAndAddFile(vst3Description.fileOrIdentifier, true, typesFound, *format);
+
 
 }
